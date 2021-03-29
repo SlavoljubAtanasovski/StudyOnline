@@ -2,8 +2,9 @@ from os import listdir
 from os.path import join, isdir
 
 from django.conf.urls import include, url
-
+from django.urls import path
 from config.settings import BASE_DIR
+from rest_framework_swagger.views import get_swagger_view
 
 API_DIR = 'school/api/'
 

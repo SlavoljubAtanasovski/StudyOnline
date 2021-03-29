@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+from rest_framework_swagger.views import get_swagger_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api/', include(('school.urls', 'school'), namespace='school')),
+    url(r'^user/', include('user.urls')),
+    url(r'^school/', include('school.urls')),
+    path('docs/', get_swagger_view(title="API document"), name="swagger"),
 ]
