@@ -5,6 +5,8 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.core.mail import send_mail
+from django.conf import settings
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -74,13 +76,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     is_active = models.BooleanField(
         _('active'),
-        default=True,
+        default=False,
         help_text=_(
             'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'
         ),
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    auth_code = models.TextField(_('auth code'), max_length=10, blank=True)
     objects = UserManager()
     
     USERNAME_FIELD = 'email'                # set email as identifier
