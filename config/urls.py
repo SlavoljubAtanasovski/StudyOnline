@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+from config import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from rest_framework_swagger.views import get_swagger_view
 
 urlpatterns = [
@@ -23,4 +26,6 @@ urlpatterns = [
     url(r'^user/', include('user.urls')),
     url(r'^school/', include('school.urls')),
     path('docs/', get_swagger_view(title="API document"), name="swagger"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
