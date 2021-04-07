@@ -140,6 +140,13 @@ class ProfileView(APIView):  # set_profile using apiview class
 
     def post(self, request, format=None):
         email = request.data['email']
+        country = request.data['country']
+        city = request.data['city']
+        photo_url = request.data['photo_url'] if 'photo_url' in request.data else ""
+        birthday = request.data['birthday']
+        sex = request.data['sex']
+        interest = request.data['interest']
+        about_me = request.data['about_me']
         native_lang = json.loads(
             request.data['native_lang'])
         study_lang = json.loads(
